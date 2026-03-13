@@ -11,7 +11,9 @@ services:
       - key: PORT
         value: 5000
       - key: DATABASE_URL
-        sync: false
+        fromDatabase:
+          name: medchain-db
+          property: connectionString
       - key: JWT_SECRET
         sync: false
       - key: GOOGLE_API_KEY
