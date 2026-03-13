@@ -1,0 +1,24 @@
+{
+  "name": "medchain-ai",
+  "version": "1.0.0",
+  "description": "AI-Powered Healthcare Monitoring with Blockchain Audit Trail",
+  "private": true,
+  "scripts": {
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "install:all": "cd backend && npm install && cd ../ai-agent && npm install && cd ../blockchain && npm install && cd ../frontend && npm install",
+    "test:blockchain": "cd blockchain && npx hardhat test",
+    "test:demo": "node scripts/test-demo.js"
+  },
+  "keywords": [
+    "healthcare",
+    "ai",
+    "blockchain",
+    "monitoring"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "pg": "^8.20.0"
+  }
+}

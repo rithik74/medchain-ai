@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: medchain-ai-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: ALERT_EMAIL
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+
+databases:
+  - name: medchain-db
+    plan: free
+    databaseName: medchain_db
+    user: medchain_user

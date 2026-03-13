@@ -1,0 +1,111 @@
+MedChainAI/
+│
+├── frontend/
+│   ├── public/
+│   │   ├── index.html
+│   │   └── favicon.ico
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── PatientCard.jsx
+│   │   │   ├── VitalsInput.jsx
+│   │   │   ├── RiskAlert.jsx
+│   │   │   ├── BlockchainStatus.jsx
+│   │   │   └── Header.jsx
+│   │   ├── services/
+│   │   │   ├── api.js
+│   │   │   └── blockchain.js
+│   │   ├── utils/
+│   │   │   └── helpers.js
+│   │   ├── App.jsx
+│   │   ├── index.js
+│   │   └── index.css
+│   ├── package.json
+│   └── tailwind.config.js
+│
+├── backend/
+│   ├── src/
+│   │   ├── routes/
+│   │   │   ├── patients.js
+│   │   │   ├── vitals.js
+│   │   │   ├── risk.js
+│   │   │   └── blockchain.js
+│   │   ├── controllers/
+│   │   │   ├── patientController.js
+│   │   │   ├── vitalsController.js
+│   │   │   ├── riskController.js
+│   │   │   └── blockchainController.js
+│   │   ├── services/
+│   │   │   ├── aiService.js
+│   │   │   ├── blockchainService.js
+│   │   │   ├── alertService.js
+│   │   │   └── hashService.js
+│   │   ├── middleware/
+│   │   │   ├── auth.js
+│   │   │   ├── validation.js
+│   │   │   └── errorHandler.js
+│   │   ├── config/
+│   │   │   ├── database.js
+│   │   │   ├── blockchain.js
+│   │   │   └── env.js
+│   │   ├── models/
+│   │   │   ├── Patient.js
+│   │   │   ├── Vitals.js
+│   │   │   └── RiskLog.js
+│   │   └── server.js
+│   ├── package.json
+│   └── .env.example
+│
+├── ai-agent/
+│   ├── src/
+│   │   ├── agent.js
+│   │   ├── chains/
+│   │   │   ├── riskAnalysisChain.js
+│   │   │   └── actionChain.js
+│   │   ├── prompts/
+│   │   │   └── healthcarePrompt.js
+│   │   ├── tools/
+│   │   │   └── riskCalculator.js
+│   │   └── config/
+│   │       └── llm.js
+│   ├── package.json
+│   └── .env.example
+│
+├── blockchain/
+│   ├── contracts/
+│   │   ├── MedicalRecordHash.sol
+│   │   └── AccessControl.sol
+│   ├── scripts/
+│   │   ├── deploy.js
+│   │   └── verify.js
+│   ├── test/
+│   │   └── MedicalRecordHash.test.js
+│   ├── hardhat.config.js
+│   ├── package.json
+│   └── .env.example
+│
+├── database/
+│   ├── migrations/
+│   │   ├── 001_create_patients.sql
+│   │   ├── 002_create_vitals.sql
+│   │   └── 003_create_risk_logs.sql
+│   ├── seeds/
+│   │   └── sample_patients.sql
+│   └── schema.sql
+│
+├── scripts/
+│   ├── setup.sh
+│   ├── deploy-all.sh
+│   ├── test-demo.js
+│   └── seed-data.js
+│
+├── docs/
+│   ├── API.md
+│   ├── ARCHITECTURE.md
+│   ├── DEMO.md
+│   └── SETUP.md
+│
+├── .gitignore
+├── package.json
+├── README.md
+└── docker-compose.yml

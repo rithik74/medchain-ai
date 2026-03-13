@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: #0f172a;
+  color: #f8fafc;
+  min-height: 100vh;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #1e293b; }
+::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+/* Glass card */
+.glass-card {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  border-radius: 16px;
+}
+
+/* Risk level animations */
+@keyframes critical-flash {
+  0%, 100% { opacity: 1; box-shadow: 0 0 20px rgba(239, 68, 68, 0.6); }
+  50% { opacity: 0.85; box-shadow: 0 0 40px rgba(239, 68, 68, 0.9); }
+}
+.risk-critical { animation: critical-flash 1.2s ease-in-out infinite; }
+
+@keyframes high-pulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(249, 115, 22, 0.4); }
+  50% { box-shadow: 0 0 25px rgba(249, 115, 22, 0.7); }
+}
+.risk-high { animation: high-pulse 2s ease-in-out infinite; }
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Input styles */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Notification slide-in */
+@keyframes slide-in {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.animate-slide-in { animation: slide-in 0.3s ease-out; }
+
+/* Progress bar for auto-dismiss */
+@keyframes progress {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+.animate-progress { animation: progress 8s linear; }
+
+/* Smooth page transitions */
+.page-enter { animation: fadeIn 0.3s ease-out; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}

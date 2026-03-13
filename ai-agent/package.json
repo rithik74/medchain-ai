@@ -1,0 +1,14 @@
+{
+  "name": "medchain-ai-agent",
+  "version": "1.0.0",
+  "description": "AI Healthcare Monitoring Agent using LangChain",
+  "main": "src/agent.js",
+  "scripts": { "test": "node test.js" },
+  "dependencies": {
+    "@langchain/core": "^0.3.0",
+    "@langchain/google-genai": "^0.1.0",
+    "@langchain/openai": "^0.3.0",
+    "dotenv": "^16.4.5",
+    "langchain": "^0.3.0"
+  }
+}
