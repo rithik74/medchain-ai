@@ -24,6 +24,7 @@ const appointmentRoutes = require('./routes/appointments');
 
 const app = express();
 const server = http.createServer(app);
+
 const io = new Server(server, {
   cors: {
     origin: process.env.FRONTEND_URL || '*',
@@ -34,17 +35,31 @@ const io = new Server(server, {
 
 app.set('io', io);
 
+/* ---------------- Middleware ---------------- */
+
 app.use(cors({
   origin: process.env.FRONTEND_URL || '*',
   credentials: true,
 }));
+
 app.use(helmet({ contentSecurityPolicy: false }));
-if (process.env.NODE_ENV !== 'production') app.use(morgan('dev'));
+
+if (process.env.NODE_ENV !== 'production') {
+  app.use(morgan('dev'));
+}
+
 app.use(express.json());
 
+/* ---------------- Health Check ---------------- */
+
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+  res.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+  });
 });
+
+/* ---------------- Routes ---------------- */
 
 app.use('/api/auth', authRoutes);
 app.use('/api/patients', patientRoutes);
@@ -60,9 +75,12 @@ app.use('/api/analytics', analyticsRoutes);
 app.use('/api/assignments', assignmentRoutes);
 app.use('/api/appointments', appointmentRoutes);
 
+/* ---------------- Error Handler ---------------- */
+
 app.use(errorHandler);
 
-// Socket.IO connections
+/* ---------------- Socket.IO ---------------- */
+
 io.on('connection', (socket) => {
   console.log(`🔌 Socket connected: ${socket.id}`);
 
@@ -76,24 +94,35 @@ io.on('connection', (socket) => {
   });
 });
 
+/* ---------------- Start Server ---------------- */
+
 async function startServer() {
   try {
+
     await sequelize.authenticate();
     console.log('✅ Database connection established');
+
     await sequelize.sync({ alter: true });
     console.log('✅ Database models synced');
 
-    server.listen(env.PORT, () => {
-      console.log(`\n🏥 MedChain AI Backend running on port ${env.PORT}`);
-      console.log(`   Health: http://localhost:${env.PORT}/api/health`);
-      console.log(`   Auth:   http://localhost:${env.PORT}/api/auth`);
-      console.log(`   Socket.IO: Enabled ✅\n`);
+    // IMPORTANT: Render requires process.env.PORT
+    const PORT = process.env.PORT || env.PORT || 5000;
+
+    server.listen(PORT, "0.0.0.0", () => {
+      console.log(`\n🏥 MedChain AI Backend running on port ${PORT}`);
+      console.log(`Health: /api/health`);
+      console.log(`Auth: /api/auth`);
+      console.log(`Socket.IO: Enabled ✅\n`);
     });
+
   } catch (error) {
+
     console.error('❌ Unable to start server:', error.message);
     process.exit(1);
+
   }
 }
 
 startServer();
+
 module.exports = app;
