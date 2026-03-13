@@ -20,6 +20,7 @@ const emergencyRoutes = require('./routes/emergency');
 const reportRoutes = require('./routes/reports');
 const analyticsRoutes = require('./routes/analytics');
 const assignmentRoutes = require('./routes/assignments');
+const appointmentRoutes = require('./routes/appointments');
 
 const app = express();
 const server = http.createServer(app);
@@ -57,6 +58,7 @@ app.use('/api/emergency', emergencyRoutes);
 app.use('/api/reports', reportRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/assignments', assignmentRoutes);
+app.use('/api/appointments', appointmentRoutes);
 
 app.use(errorHandler);
 

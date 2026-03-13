@@ -9,6 +9,8 @@ const User = sequelize.define('User', {
   password: { type: DataTypes.STRING, allowNull: false },
   role: { type: DataTypes.ENUM('doctor', 'patient', 'admin'), defaultValue: 'patient' },
   patient_id: { type: DataTypes.STRING, allowNull: true },
+  two_factor_secret: { type: DataTypes.STRING, allowNull: true },
+  two_factor_enabled: { type: DataTypes.BOOLEAN, defaultValue: false },
 }, {
   tableName: 'users',
   timestamps: true,

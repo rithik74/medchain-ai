@@ -14,6 +14,8 @@ import ChatBot from './components/ChatBot';
 import SOSButton from './components/SOSButton';
 import MyDoctors from './components/MyDoctors';
 import DeviceMode from './components/DeviceMode';
+import Appointments from './components/Appointments';
+import VideoRoom from './components/VideoRoom';
 import { connectWallet } from './services/blockchain';
 
 function ProtectedRoute({ children }) {
@@ -38,6 +40,7 @@ function AppLayout() {
 
   const tabs = [
     { key: 'dashboard', icon: '🏠', label: 'Dashboard' },
+    { key: 'appointments', icon: '📅', label: 'Appointments' },
     ...(user?.role === 'patient' ? [
       { key: 'iot-device', icon: '📡', label: 'IoT Device' },
       { key: 'my-doctors', icon: '👨‍⚕️', label: 'My Doctors' },
@@ -66,6 +69,7 @@ function AppLayout() {
 
         {/* Page Content */}
         {activeTab === 'dashboard' && <Dashboard />}
+        {activeTab === 'appointments' && <Appointments />}
         {activeTab === 'iot-device' && <DeviceMode />}
         {activeTab === 'my-doctors' && <MyDoctors />}
         {activeTab === 'analytics' && <AnalyticsDashboard />}
@@ -91,6 +95,11 @@ export default function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/video-consultation/:appointmentId" element={
+              <ProtectedRoute>
+                <VideoRoom />
+              </ProtectedRoute>
+            } />
             <Route path="/*" element={<ProtectedRoute><AppLayout /></ProtectedRoute>} />
           </Routes>
         </SocketProvider>

@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import { useAuth } from './AuthContext';
+import TwoFactorSetup from './TwoFactorSetup';
 
 export default function Header({ walletAddress, onConnectWallet }) {
   const { user, logout } = useAuth();
+  const [show2FA, setShow2FA] = useState(false);
 
   return (
     <header className="glass-card px-6 py-4 flex items-center justify-between mb-6">
@@ -42,12 +45,23 @@ export default function Header({ walletAddress, onConnectWallet }) {
         </button>
 
         {user && (
-          <button onClick={logout}
-            className="px-3 py-2 rounded-xl text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 border border-transparent hover:border-slate-700/50 transition-all">
-            🚪 Logout
-          </button>
+          <>
+            <button onClick={() => setShow2FA(true)}
+              className="hidden sm:inline-block px-3 py-2 rounded-xl text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 border border-transparent hover:border-slate-700/50 transition-all">
+              🔐 2FA Setup
+            </button>
+            <button onClick={logout}
+              className="px-3 py-2 rounded-xl text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 border border-transparent hover:border-slate-700/50 transition-all">
+              🚪 Logout
+            </button>
+          </>
         )}
       </div>
+
+      {show2FA && <TwoFactorSetup onClose={() => setShow2FA(false)} onVerified={() => {
+        setShow2FA(false);
+        alert('2FA successfully enabled!');
+      }} />}
     </header>
   );
 }

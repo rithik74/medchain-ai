@@ -18,6 +18,9 @@ api.interceptors.request.use((config) => {
 export const loginUser = (data) => api.post('/auth/login', data).then(r => r.data);
 export const registerUser = (data) => api.post('/auth/register', data).then(r => r.data);
 export const getMe = () => api.get('/auth/me').then(r => r.data);
+export const setup2FA = () => api.get('/auth/setup-2fa').then(r => r.data);
+export const verify2FA = (data) => api.post('/auth/verify-2fa', data).then(r => r.data);
+export const login2FA = (data) => api.post('/auth/login-2fa', data).then(r => r.data);
 
 // Patients
 export const fetchPatients = () => api.get('/patients').then(r => r.data);
@@ -27,6 +30,12 @@ export const getPatient = (id) => api.get(`/patients/${id}`).then(r => r.data);
 // Vitals
 export const submitVitals = (data) => api.post('/vitals', data).then(r => r.data);
 export const getVitals = (patientId) => api.get(`/vitals/${patientId}`).then(r => r.data);
+
+// Appointments
+export const getAppointments = () => api.get('/appointments').then(r => r.data);
+export const requestAppointment = (data) => api.post('/appointments/request', data).then(r => r.data);
+export const approveAppointment = (id) => api.put(`/appointments/${id}/approve`).then(r => r.data);
+export const cancelAppointment = (id) => api.put(`/appointments/${id}/cancel`).then(r => r.data);
 
 // Risk
 export const analyzeRisk = (data) => api.post('/risk/analyze', data).then(r => r.data);

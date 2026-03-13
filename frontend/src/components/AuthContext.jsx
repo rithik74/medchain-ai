@@ -22,6 +22,20 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     const res = await api.post('/auth/login', { email, password });
+    
+    if (res.data.data.require2FA) {
+      return res.data.data; // Return tempToken and require2FA flag to UI
+    }
+
+    const { token, ...userData } = res.data.data;
+    localStorage.setItem('medchain_token', token);
+    api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    setUser(userData);
+    return userData;
+  };
+
+  const loginWith2FA = async (tempToken, totpToken) => {
+    const res = await api.post('/auth/login-2fa', { tempToken, totpToken });
     const { token, ...userData } = res.data.data;
     localStorage.setItem('medchain_token', token);
     api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -45,7 +59,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, loginWith2FA, register, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );
